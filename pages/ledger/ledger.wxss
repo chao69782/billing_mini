@@ -31,7 +31,7 @@
   align-items: flex-start;
   margin-bottom: 10rpx;
   /* 适配状态栏高度，这里假设一个安全顶部距离，实际项目中建议用 CSS 变量 */
-  padding-top: calc(40rpx + env(safe-area-inset-top)); 
+  padding-top: 110rpx; 
 }
 
 .date-picker {
