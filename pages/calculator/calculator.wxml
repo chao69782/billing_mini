@@ -1,0 +1,208 @@
+<wxs module="calc">
+var calculateLoan = function(price, ratio) {
+  if (price && ratio) {
+    return (price * ratio / 10).toFixed(2);
+  }
+  return '0';
+}
+module.exports.calculateLoan = calculateLoan;
+</wxs>
+<view class="container">
+  <!-- Tabs -->
+  <view class="tabs">
+    <view 
+      wx:for="{{tabs}}" 
+      wx:key="index" 
+      class="tab-item {{activeTab === index ? 'active' : ''}}"
+      bindtap="onTabClick"
+      data-index="{{index}}"
+    >
+      {{item}}
+      <view class="tab-line" wx:if="{{activeTab === index}}"></view>
+    </view>
+  </view>
+
+  <!-- Content -->
+  <view class="content">
+    
+    <!-- Commercial Loan -->
+    <block wx:if="{{activeTab === 0}}">
+      <view class="form-group">
+        <view class="form-item">
+          <text class="label">计算方式</text>
+          <radio-group class="radio-group" bindchange="onCommMethodChange">
+            <label class="radio">
+              <radio value="amount" checked="{{commCalculationMethod === 'amount'}}" color="#FFDA44"/>按贷款总额
+            </label>
+            <label class="radio">
+              <radio value="price" checked="{{commCalculationMethod === 'price'}}" color="#FFDA44"/>按房屋总价
+            </label>
+          </radio-group>
+        </view>
+
+        <block wx:if="{{commCalculationMethod === 'price'}}">
+          <view class="form-item">
+            <text class="label">房屋总价</text>
+            <view class="input-wrapper">
+              <input type="digit" placeholder="0" value="{{commHousePrice}}" bindinput="onInputChange" data-field="commHousePrice" />
+              <text class="unit">万</text>
+            </view>
+          </view>
+          <view class="form-item">
+            <text class="label">贷款比例</text>
+            <view class="input-wrapper">
+              <input type="digit" placeholder="0" value="{{commLoanRatio}}" bindinput="onInputChange" data-field="commLoanRatio" />
+              <text class="unit">成</text>
+            </view>
+          </view>
+          <view class="form-item">
+            <text class="label">贷款总额</text>
+            <view class="input-wrapper">
+              <text class="value">{{calc.calculateLoan(commHousePrice, commLoanRatio)}}</text>
+              <text class="unit">万</text>
+            </view>
+          </view>
+        </block>
+
+        <block wx:else>
+          <view class="form-item">
+            <text class="label">商贷金额</text>
+            <view class="input-wrapper">
+              <input type="digit" placeholder="0" value="{{commLoanAmount}}" bindinput="onInputChange" data-field="commLoanAmount" />
+              <text class="unit">万</text>
+            </view>
+          </view>
+        </block>
+
+        <view class="form-item">
+          <text class="label">商贷年限</text>
+          <picker range="{{loanTerms}}" value="{{commLoanTermIndex}}" bindchange="onPickerChange" data-field="commLoanTermIndex">
+            <view class="picker">
+              {{loanTerms[commLoanTermIndex]}}
+              <text class="arrow">›</text>
+            </view>
+          </picker>
+        </view>
+
+        <view class="form-item">
+          <text class="label">利率方式</text>
+          <picker range="{{rateMethods}}" value="{{commRateMethodIndex}}" bindchange="onPickerChange" data-field="commRateMethodIndex">
+            <view class="picker">
+              {{rateMethods[commRateMethodIndex]}}
+              <text class="arrow">›</text>
+            </view>
+          </picker>
+        </view>
+
+        <view class="form-item">
+          <text class="label">商贷利率</text>
+          <view class="input-wrapper">
+            <input type="digit" placeholder="0" value="{{commRate}}" bindinput="onInputChange" data-field="commRate" />
+            <text class="unit">%</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- Combination Loan -->
+    <block wx:if="{{activeTab === 1}}">
+      <view class="form-group">
+        <view class="form-item">
+          <text class="label">公积金金额</text>
+          <view class="input-wrapper">
+            <input type="digit" placeholder="0" value="{{combProvidentAmount}}" bindinput="onInputChange" data-field="combProvidentAmount" />
+            <text class="unit">万</text>
+          </view>
+        </view>
+        <view class="form-item">
+          <text class="label">公积金年限</text>
+          <picker range="{{loanTerms}}" value="{{combProvidentTermIndex}}" bindchange="onPickerChange" data-field="combProvidentTermIndex">
+            <view class="picker">
+              {{loanTerms[combProvidentTermIndex]}}
+              <text class="arrow">›</text>
+            </view>
+          </picker>
+        </view>
+        <view class="form-item">
+          <text class="label">公积金利率</text>
+          <view class="input-wrapper">
+            <input type="digit" placeholder="0" value="{{combProvidentRate}}" bindinput="onInputChange" data-field="combProvidentRate" />
+            <text class="unit">%</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="divider"></view>
+
+      <view class="form-group">
+        <view class="form-item">
+          <text class="label">商贷金额</text>
+          <view class="input-wrapper">
+            <input type="digit" placeholder="0" value="{{combCommAmount}}" bindinput="onInputChange" data-field="combCommAmount" />
+            <text class="unit">万</text>
+          </view>
+        </view>
+        <view class="form-item">
+          <text class="label">商贷年限</text>
+          <picker range="{{loanTerms}}" value="{{combCommTermIndex}}" bindchange="onPickerChange" data-field="combCommTermIndex">
+            <view class="picker">
+              {{loanTerms[combCommTermIndex]}}
+              <text class="arrow">›</text>
+            </view>
+          </picker>
+        </view>
+        <view class="form-item">
+          <text class="label">利率方式</text>
+          <picker range="{{rateMethods}}" value="{{combCommRateMethodIndex}}" bindchange="onPickerChange" data-field="combCommRateMethodIndex">
+            <view class="picker">
+              {{rateMethods[combCommRateMethodIndex]}}
+              <text class="arrow">›</text>
+            </view>
+          </picker>
+        </view>
+
+        <view class="form-item">
+          <text class="label">商贷利率</text>
+          <view class="input-wrapper">
+            <input type="digit" placeholder="0" value="{{combCommRate}}" bindinput="onInputChange" data-field="combCommRate" />
+            <text class="unit">%</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- Provident Fund Loan -->
+    <block wx:if="{{activeTab === 2}}">
+      <view class="form-group">
+        <view class="form-item">
+          <text class="label">公积金金额</text>
+          <view class="input-wrapper">
+            <input type="digit" placeholder="0" value="{{provLoanAmount}}" bindinput="onInputChange" data-field="provLoanAmount" />
+            <text class="unit">万</text>
+          </view>
+        </view>
+        <view class="form-item">
+          <text class="label">公积金年限</text>
+          <picker range="{{loanTerms}}" value="{{provLoanTermIndex}}" bindchange="onPickerChange" data-field="provLoanTermIndex">
+            <view class="picker">
+              {{loanTerms[provLoanTermIndex]}}
+              <text class="arrow">›</text>
+            </view>
+          </picker>
+        </view>
+        <view class="form-item">
+          <text class="label">公积金利率</text>
+          <view class="input-wrapper">
+            <input type="digit" placeholder="0" value="{{provRate}}" bindinput="onInputChange" data-field="provRate" />
+            <text class="unit">%</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- Calculate Button -->
+    <view class="btn-area">
+      <button class="btn-calculate" bindtap="calculate">开始计算</button>
+    </view>
+  </view>
+</view>

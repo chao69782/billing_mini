@@ -1,0 +1,423 @@
+/* 引用全局样式 */
+@import '../../assets/iconfont.wxss';
+
+page {
+  background: #F5F7FA;
+  height: 100%;
+}
+
+.container {
+  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+}
+
+/* 头部样式 */
+.header {
+  height: var(--header-height);
+  background: var(--header-bg);
+  padding: 0 32rpx var(--header-padding-bottom);
+  position: relative;
+  z-index: 5001;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-sizing: border-box;
+}
+
+.header-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 32rpx;
+  z-index: 100;
+}
+
+.type-selector {
+  display: flex;
+  align-items: center;
+  font-size: 34rpx;
+  font-weight: 500;
+  padding: 10rpx 20rpx;
+}
+
+.arrow {
+  font-size: 24rpx;
+  margin-left: 8rpx;
+  transition: transform 0.3s;
+}
+
+.arrow.rotated {
+  transform: rotate(180deg);
+}
+
+/* 下拉菜单蒙层 */
+.type-menu-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+}
+
+/* 下拉菜单 */
+.type-menu {
+  position: absolute; /* 改为 absolute 定位，相对于 header */
+  top: 100%; /* 紧贴 header 底部 */
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 5002;
+  padding: 0 32rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-left {
+  display: flex;
+  align-items: center;
+}
+
+.menu-left > view {
+  margin-right: 16rpx;  /* 添加图标和文字之间的间距 */
+}
+
+/* 对勾图标 */
+.menu-check {
+  width: 32rpx;
+  height: 32rpx;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3E%3Cpath fill='%23333333' d='M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474.7c-6.1-7.7-15.3-12.2-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-13.5-6.3-13.5z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent !important;
+}
+
+/* 分段控制器 */
+.tab-control {
+  display: flex;
+  background: #333;
+  border-radius: 16rpx;
+  padding: 4rpx;
+  margin: 0 20rpx;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  font-size: 28rpx;
+  color: var(--brand-yellow);
+  padding: 12rpx 0;
+  border-radius: 12rpx;
+}
+
+.tab-item.active {
+  background: var(--brand-yellow);
+  color: #333;
+  font-weight: 500;
+}
+
+/* 年份滚动 */
+.year-scroll {
+  white-space: nowrap;
+  border-bottom: 1rpx solid #eee;
+  background: #fff;
+}
+
+.year-list {
+  display: flex;
+  padding: 0 32rpx;
+}
+
+.year-item {
+  padding: 24rpx 32rpx;
+  font-size: 28rpx;
+  color: #999;
+  position: relative;
+}
+
+.year-item.active {
+  color: #333;
+  font-weight: 500;
+  font-size: 30rpx;
+}
+
+.year-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  background: #333;
+}
+
+/* 统计区域 */
+.summary-section {
+  padding: 32rpx;
+  background: #fff;
+  margin: 24rpx 24rpx 0;
+  border-radius: 24rpx;
+}
+
+.summary-info {
+  margin-bottom: 40rpx;
+}
+
+.summary-row {
+  font-size: 32rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+}
+
+.summary-row.sub {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.balance-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+}
+
+.balance-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.balance-title {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.balance-value {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #333;
+}
+
+.balance-sub {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #999;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  margin-top: 20rpx;
+}
+
+.bar-label {
+  width: 72rpx;
+  font-size: 26rpx;
+  color: #666;
+}
+
+.bar {
+  flex: 1;
+  height: 16rpx;
+  background: #F5F5F5;
+  border-radius: 999rpx;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: var(--brand-yellow);
+  border-radius: 999rpx;
+}
+
+.bar-amount {
+  font-size: 26rpx;
+  color: #666;
+  min-width: 140rpx;
+  text-align: right;
+}
+
+/* 模拟图表相关样式已移除 */
+
+/* 饼图区域 */
+.chart-section {
+  padding: 32rpx;
+  background: #fff;
+  margin: 24rpx;
+  border-radius: 24rpx;
+}
+
+.chart-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.pie-chart-wrapper {
+  position: relative;
+  width: 280rpx;
+  height: 280rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 32rpx;
+  flex-shrink: 0;
+}
+
+.pie-chart {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.pie-center {
+  position: absolute;
+  width: 160rpx;
+  height: 160rpx;
+  background: #fff;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.legend-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 280rpx; /* 确保内容少时垂直居中 */
+  overflow: hidden; /* 防止溢出 */
+}
+
+.legend-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+  font-size: 26rpx;
+}
+
+.legend-item:last-child {
+  margin-bottom: 0;
+}
+
+.legend-left {
+  display: flex;
+  align-items: center;
+  flex: 1; /* 占据剩余空间 */
+  overflow: hidden; /* 超出隐藏 */
+  margin-right: 20rpx;
+}
+
+.legend-color {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 6rpx;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+
+.legend-name {
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.legend-right {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0; /* 防止数据被压缩 */
+}
+
+.legend-percent {
+  color: #333;
+  font-weight: 500;
+  margin-right: 24rpx;
+  min-width: 80rpx;
+  text-align: right;
+}
+
+.legend-amount {
+  color: #333;
+  font-weight: 500;
+  min-width: 100rpx;
+  text-align: right;
+}
+
+/* 排行榜 */
+.ranking-section {
+  padding: 32rpx;
+  background: #fff;
+  margin: 24rpx;
+  border-radius: 24rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  margin-bottom: 32rpx;
+}
+
+.ranking-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+
+.rank-icon-wrapper {
+  width: 72rpx;
+  height: 72rpx;
+  background: #F5F7FA;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+}
+
+.rank-icon-wrapper .iconfont {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.rank-content {
+  flex: 1;
+}
+
+.rank-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+  font-size: 28rpx;
+}
+
+.rank-name {
+  color: #333;
+}
+
+.rank-percent {
+  color: #999;
+  font-size: 24rpx;
+  margin-left: 16rpx;
+}
+
+.rank-amount {
+  font-weight: 500;
+}

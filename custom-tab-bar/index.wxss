@@ -1,0 +1,108 @@
+@import '../assets/iconfont.wxss';
+
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100rpx;
+  padding-bottom: env(safe-area-inset-bottom);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.05);
+  z-index: 999;
+  border-top-left-radius: 32rpx;
+  border-top-right-radius: 32rpx;
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8rpx 0;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4rpx;
+  transition: all 0.2s;
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+}
+
+.tab-icon {
+  transition: all 0.2s;
+  font-size: 44rpx;
+}
+
+.tab-text {
+  font-size: 22rpx;
+  color: #94A3B8;
+  font-weight: 500;
+}
+
+/* 选中态 */
+.tab-item.active .icon-wrapper {
+  background: var(--brand-yellow, #FFDA44);
+  border-radius: 50%;
+  width: 64rpx;
+  height: 64rpx;
+  display: flex; /* 确保使用 flex 布局 */
+  align-items: center; /* 垂直居中 */
+  justify-content: center; /* 水平居中 */
+}
+
+.tab-item.active .tab-icon {
+  opacity: 1;
+  filter: brightness(0); /* 使用滤镜将灰色图标变黑 */
+  transform: scale(0.9); /* 稍微缩小图标以适应圆圈 */
+}
+
+.tab-item.active .tab-text {
+  color: #333;
+  font-weight: 600;
+}
+
+/* 中间按钮特殊样式 */
+.tab-item.middle-item {
+  transform: translateY(-20rpx);
+}
+
+.tab-item.middle-item .icon-wrapper {
+  width: 96rpx;
+  height: 96rpx;
+  background: var(--brand-yellow, #FFDA44);
+  border-radius: 50%;
+  margin-bottom: 8rpx;
+  box-shadow: 0 4rpx 12rpx rgba(255, 218, 68, 0.4);
+}
+
+.tab-item.middle-item .tab-icon {
+  color: #333;
+  width: 52rpx;
+  height: 52rpx;
+  /* font-size: 52rpx; */ /* SVG Mask 模式下不需要字体大小控制 */
+}
+
+.tab-item.middle-item.active .icon-wrapper {
+  width: 96rpx;
+  height: 96rpx;
+  transform: none;
+}
+
+.tab-item.middle-item.active .tab-icon {
+  transform: none;
+}
+
+.tab-item.middle-item.active .tab-text {
+  color: #333;
+}

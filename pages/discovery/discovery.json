@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "发现",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "custom-tab-bar": "/custom-tab-bar"
+  }
+}

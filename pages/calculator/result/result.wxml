@@ -1,0 +1,70 @@
+<view class="container">
+  <!-- Tabs -->
+  <view class="tabs">
+    <view class="tab-item {{activeTab === 0 ? 'active' : ''}}" bindtap="onTabClick" data-index="0">
+      等额本息
+      <view class="tab-line" wx:if="{{activeTab === 0}}"></view>
+    </view>
+    <view class="tab-item {{activeTab === 1 ? 'active' : ''}}" bindtap="onTabClick" data-index="1">
+      等额本金
+      <view class="tab-line" wx:if="{{activeTab === 1}}"></view>
+    </view>
+  </view>
+
+  <!-- Result Card -->
+  <view class="card-wrapper">
+    <view class="result-card">
+      <view class="card-header">
+        <text>{{activeTab === 0 ? '每月应还' : '首月应还'}}</text>
+      </view>
+      <view class="card-amount">
+        <text class="amount">{{result.monthlyPayment}}</text>
+        <text class="unit">元</text>
+      </view>
+      <view class="card-sub" wx:if="{{activeTab === 1}}">
+        <text>每月递减约{{result.monthlyDecrease}}元</text>
+      </view>
+
+      <view class="card-grid">
+        <view class="grid-item">
+          <text class="label">贷款总额</text>
+          <text class="value">{{result.totalPayment}}万</text>
+        </view>
+        <view class="grid-item">
+          <text class="label">利息总额</text>
+          <text class="value">{{result.totalInterest}}万</text>
+        </view>
+        <view class="grid-item">
+          <text class="label">贷款年限</text>
+          <text class="value">{{result.months}}年</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Description -->
+  <view class="description">
+    <text wx:if="{{activeTab === 0}}">每月还款金额不变，其中还款的本金逐月递增，利息逐月递减。计算结果仅供参考。</text>
+    <text wx:else>每月还款金额递减{{result.monthlyDecrease}}元，其中每月还款的本金不变，利息逐月减少。计算结果仅供参考。</text>
+  </view>
+
+  <!-- List Header -->
+  <view class="list-header">
+    <text class="col col-1">期数</text>
+    <text class="col col-2">月供总额</text>
+    <text class="col col-3">月供本金</text>
+    <text class="col col-4">月供利息</text>
+    <text class="col col-5">剩余本金</text>
+  </view>
+
+  <!-- List Content -->
+  <scroll-view scroll-y class="list-content">
+    <view class="list-item" wx:for="{{result.details}}" wx:key="period">
+      <text class="col col-1">{{item.period}}</text>
+      <text class="col col-2">{{item.payment}}</text>
+      <text class="col col-3">{{item.principal}}</text>
+      <text class="col col-4">{{item.interest}}</text>
+      <text class="col col-5">{{item.remaining}}</text>
+    </view>
+  </scroll-view>
+</view>

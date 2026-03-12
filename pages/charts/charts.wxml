@@ -1,0 +1,130 @@
+<view class="container">
+  <!-- 顶部头部 -->
+  <view class="header">
+    <view class="header-top">
+      <view class="type-selector" bindtap="toggleTypeMenu">
+        <text class="type-text">{{type === 1 ? '支出' : '收入'}}</text>
+        <text class="arrow {{showTypeMenu ? 'rotated' : ''}}">▼</text>
+      </view>
+    </view>
+    
+    <!-- 类型选择下拉菜单 (移出 header-top 避免被遮挡) -->
+    <view class="type-menu-mask" wx:if="{{showTypeMenu}}" bindtap="toggleTypeMenu"></view>
+    
+    <view class="tab-control">
+      <view class="tab-item {{dateRange === 'month' ? 'active' : ''}}" bindtap="switchRange" data-range="month">月</view>
+      <view class="tab-item {{dateRange === 'year' ? 'active' : ''}}" bindtap="switchRange" data-range="year">年</view>
+    </view>
+
+    <!-- 下拉菜单 (移回 header 内部，使用 absolute 定位) -->
+    <view class="type-menu" wx:if="{{showTypeMenu}}">
+      <view class="menu-item {{type === 1 ? 'active' : ''}}" hover-class="none" catchtap="selectType" data-type="{{1}}">
+        <view class="menu-left">
+          <view>
+            <view class="iconfont icon-zhichu"></view>
+          </view>
+          <text>支出</text>
+        </view>
+        <view class="menu-check" wx:if="{{type === 1}}"></view>
+      </view>
+      <view class="menu-item {{type === 2 ? 'active' : ''}}" hover-class="none" catchtap="selectType" data-type="{{2}}">
+        <view class="menu-left">
+          <view>
+            <view class="iconfont icon-shouru"></view>
+          </view>
+          <text>收入</text>
+        </view>
+        <view class="menu-check" wx:if="{{type === 2}}"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 时间滚动条 -->
+  <scroll-view class="year-scroll" scroll-x="true" enable-flex="true" scroll-into-view="{{scrollIntoView}}" scroll-with-animation="true">
+    <view class="year-list">
+      <view 
+        id="item-{{index}}"
+        class="year-item {{currentTime === item ? 'active' : ''}}" 
+        wx:for="{{timeList}}" 
+        wx:key="*this"
+        bindtap="selectTime"
+        data-time="{{item}}"
+        data-index="{{index}}"
+      >
+        {{item}}
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 饼图区域 -->
+  <view class="chart-section">
+    <view class="section-title">{{type === 1 ? '支出类别' : '收入类别'}}</view>
+    <view class="chart-container">
+      <view class="pie-chart-wrapper">
+        <view class="pie-chart" style="background: {{pieChartGradient}}"></view>
+        <view class="pie-center"></view>
+      </view>
+      <view class="legend-list">
+        <view class="legend-item" wx:for="{{rankingList}}" wx:key="name">
+          <view class="legend-left">
+            <view class="legend-color" style="background: {{item.color}}"></view>
+            <text class="legend-name">{{item.categoryName}}</text>
+          </view>
+          <view class="legend-right">
+            <text class="legend-percent">{{item.percent}}%</text>
+            <text class="legend-amount">{{item.amount}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 统计区域 -->
+  <view class="summary-section">
+    <view class="balance-row">
+      <view class="balance-item">
+        <text class="section-title">本月结余</text>
+        <text class="balance-value">{{currentBalance}}</text>
+      </view>
+    </view>
+    <view class="bar-row">
+      <text class="bar-label">收入</text>
+      <view class="bar">
+        <view class="bar-fill" style="width: {{incomePercent}}%; background-color: {{brandYellow}};"></view>
+      </view>
+      <text class="bar-amount">{{totalIncome}}</text>
+    </view>
+    <view class="bar-row">
+      <text class="bar-label">支出</text>
+      <view class="bar">
+        <view class="bar-fill" style="width: {{expensePercent}}%; background-color: {{brandYellow}};"></view>
+      </view>
+      <text class="bar-amount">{{totalExpense}}</text>
+    </view>
+  </view>
+
+  <!-- 排行榜 -->
+  <view class="ranking-section">
+    <view class="section-title">{{type === 1 ? '支出排行榜' : '收入排行榜'}}</view>
+    <view class="ranking-list">
+      <view class="ranking-item" wx:for="{{rankingList}}" wx:key="name">
+        <view class="rank-icon-wrapper">
+          <text class="iconfont {{item.categoryIcon}}"></text>
+        </view>
+        <view class="rank-content">
+          <view class="rank-header">
+            <view class="rank-name">
+              <text>{{item.categoryName}}</text>
+              <text class="rank-percent">{{item.percent}}%</text>
+            </view>
+            <text class="rank-amount">{{item.amount}}</text>
+          </view>
+          <progress percent="{{item.percent}}" stroke-width="6" activeColor="{{brandYellow}}" backgroundColor="#F5F5F5" border-radius="6" />
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 类型选择下拉菜单 (移出 container，置于顶层) -->
+<view class="type-menu-mask" wx:if="{{showTypeMenu}}" bindtap="toggleTypeMenu"></view>

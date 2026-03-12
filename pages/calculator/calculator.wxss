@@ -1,0 +1,197 @@
+page {
+  background-color: #fff;
+  --primary-color: #FFDA44; /* Changed to Yellow */
+  --primary-btn-color: #4A90E2; /* Keep button blue as per screenshot? No, user said "ba主体颜色换位我目前的黄色", but screenshot has blue button. User said "except for the main color changed to my current yellow". 
+  Wait, "ba主体颜色换位我目前的黄色" -> "change main color to my current yellow".
+  In the screenshot, the tabs are blue, the button is blue.
+  If I change main color to yellow:
+  - Tabs active color -> Yellow
+  - Button color -> Yellow (or keep blue? usually "main color" implies the primary action color too).
+  However, standard yellow buttons with white text might have contrast issues if the yellow is too light.
+  The user's yellow is #FFDA44.
+  Let's check the screenshot again.
+  Screenshot: Tabs blue text, blue underline. Button blue background.
+  User instruction: "change main color to my current yellow".
+  So I should probably make the tabs yellow and the button yellow.
+  The button text color might need to be black if yellow is light.
+  Let's use the variable --brand-yellow from app.wxss which is #FFDA44.
+  */
+}
+
+.container {
+  padding-bottom: 40rpx;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  background: #fff;
+  border-bottom: 1rpx solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx 0;
+  font-size: 30rpx;
+  color: #333;
+  position: relative;
+}
+
+.tab-item.active {
+  color: #333; /* Usually active tab is highlighted. With yellow, maybe just bold? or yellow text? Yellow text on white might be hard to read. Let's use bold and the line. */
+  font-weight: 600;
+}
+
+.tab-line {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 6rpx;
+  background: var(--brand-yellow, #FFDA44);
+  border-radius: 4rpx;
+}
+
+/* Form */
+.content {
+  padding: 0 32rpx;
+}
+
+.form-group {
+  margin-top: 20rpx;
+}
+
+.form-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+  font-size: 30rpx;
+}
+
+.label {
+  color: #333;
+  font-weight: 500;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+input {
+  text-align: right;
+  font-size: 30rpx;
+  color: #333;
+  width: 200rpx;
+}
+
+.unit {
+  margin-left: 10rpx;
+  color: #666;
+}
+
+.picker {
+  display: flex;
+  align-items: center;
+  color: #333;
+}
+
+.arrow {
+  margin-left: 10rpx;
+  color: #ccc;
+  font-size: 32rpx;
+}
+
+/* Radio Group */
+.radio-group {
+  display: flex;
+  gap: 30rpx;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #333;
+}
+
+radio {
+  transform: scale(0.8);
+}
+
+/* LPR Info */
+.lpr-info {
+  background: #F5F7FA;
+  padding: 20rpx;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  margin: 20rpx 0;
+  font-size: 24rpx;
+}
+
+.lpr-tag {
+  background: #4A90E2; /* Keep this blue as it's likely an info tag? Or change to yellow? Screenshot has blue tag. I'll keep it blue for contrast or use a darker yellow. */
+  color: #fff;
+  padding: 2rpx 8rpx;
+  border-radius: 4rpx;
+  font-size: 20rpx;
+  margin-right: 12rpx;
+}
+
+.lpr-text {
+  flex: 1;
+  color: #666;
+}
+
+.lpr-link {
+  color: #4A90E2;
+}
+
+/* Divider */
+.divider {
+  height: 20rpx;
+  background: #f8f8f8;
+  margin: 0 -32rpx;
+}
+
+/* Button */
+.btn-area {
+  margin-top: 60rpx;
+}
+
+.btn-calculate {
+  background: #4A90E2; /* Screenshot is blue. User said change main color to yellow. */
+  /* If I change to yellow: */
+  background: var(--brand-yellow, #FFDA44);
+  color: #333; /* Black text on yellow */
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  padding: 20rpx 0;
+}
+
+.btn-calculate::after {
+  border: none;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40rpx;
+  font-size: 26rpx;
+  color: #999;
+}
+
+.separator {
+  margin: 0 20rpx;
+  color: #ddd;
+}

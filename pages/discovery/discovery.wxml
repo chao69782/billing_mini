@@ -1,0 +1,111 @@
+<view class="container">
+  <!-- 头部区域 -->
+  <view class="header">
+    <view class="page-title">发现</view>
+  </view>
+
+  <!-- 账单卡片 -->
+  <view class="card bill-card" bindtap="onBillCardTap">
+    <view class="card-header">
+      <text class="card-title">账单</text>
+      <text class="card-subtitle">{{monthStr}}</text>
+      <text class="arrow">›</text>
+    </view>
+    <view class="bill-content">
+      <view class="bill-month">
+        <text class="month-num">{{monthNum}}</text>
+        <text class="month-label">月</text>
+      </view>
+      <view class="bill-divider"></view>
+      <view class="bill-details">
+        <view class="bill-item">
+          <text class="label">收入</text>
+          <text class="amount">{{income}}</text>
+        </view>
+        <view class="bill-item">
+          <text class="label">支出</text>
+          <text class="amount">{{expense}}</text>
+        </view>
+        <view class="bill-item">
+          <text class="label">结余</text>
+          <text class="amount">{{balance}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 预算卡片 -->
+  <view class="card budget-card">
+    <view class="card-header">
+      <text class="card-title">{{monthNum}}月总预算</text>
+      <view class="budget-setting-btn" bindtap="onSetBudget">
+        <text>+</text>
+        <text>设置预算</text>
+      </view>
+    </view>
+    <view class="budget-content">
+      <view class="budget-chart">
+        <view class="chart-circle">
+          <text class="chart-label">剩余</text>
+          <text class="chart-value">{{budgetPercent}}%</text>
+        </view>
+      </view>
+      <view class="budget-info">
+        <view class="budget-row">
+          <text class="label">剩余预算:</text>
+          <text class="value">{{remainBudget}}</text>
+        </view>
+        <view class="budget-row">
+          <text class="label">本月预算:</text>
+          <text class="value">{{totalBudget}}</text>
+        </view>
+        <view class="budget-row">
+          <text class="label">本月支出:</text>
+          <text class="value">{{monthExpense}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 资产管家 -->
+  <!--
+  <view class="card asset-card">
+    <view class="card-header">
+      <text class="card-title">资产管家</text>
+      <text class="arrow">›</text>
+    </view>
+    <view class="asset-content">
+      <view class="asset-item">
+        <text class="label">净资产</text>
+        <text class="value">0.00</text>
+      </view>
+      <view class="asset-item">
+        <text class="label">资产</text>
+        <text class="value">0.00</text>
+      </view>
+      <view class="asset-item">
+        <text class="label">负债</text>
+        <text class="value">0.00</text>
+      </view>
+    </view>
+  </view>
+  -->
+
+  <!-- 常用功能 -->
+  <view class="card functions-card">
+    <view class="card-header">
+      <text class="card-title">常用功能</text>
+    </view>
+    <view class="grid-list">
+      <view class="grid-item" bindtap="onCalculatorTap">
+        <view class="icon-wrapper">
+          <text class="iconfont icon-jisuanqi"></text>
+        </view>
+        <text class="grid-label">房贷计算器</text>
+      </view>
+
+    </view>
+  </view>
+</view>
+
+<custom-tab-bar />

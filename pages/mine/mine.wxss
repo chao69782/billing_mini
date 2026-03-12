@@ -1,0 +1,235 @@
+/* 引用全局样式 */
+@import '../../assets/iconfont.wxss';
+
+page {
+  background: #fff;
+  height: 100%;
+}
+.container {
+  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+}
+
+.header {
+  height: var(--header-height);
+  background: var(--header-bg);
+  padding: 0 32rpx var(--header-padding-bottom);
+  position: relative;
+  z-index: 5001;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-sizing: border-box;
+}
+
+.user-card {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 28rpx;
+  width: 100%;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: #F1F5F9;
+}
+
+.user-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  align-items: flex-start;
+}
+
+.nickname {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.user-guest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20rpx 0;
+}
+
+.avatar-placeholder {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: var(--primary-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20rpx;
+}
+
+.avatar-icon {
+  font-size: 56rpx;
+  opacity: 0.8;
+}
+
+.guest-desc {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+}
+
+.actions {
+  padding: 0 32rpx;
+  margin-top: 80rpx;
+  margin-bottom: 48rpx;
+}
+
+.btn {
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: 600;
+  border-radius: 48rpx;
+  border: none;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-dark) 100%);
+  color: #1E293B;
+  box-shadow: 0 8rpx 20rpx rgba(255, 218, 68, 0.4);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 12rpx rgba(255, 218, 68, 0.3);
+}
+
+.btn-outline {
+  background: var(--card);
+  color: var(--primary);
+  border: 2rpx solid var(--primary);
+}
+
+/* 登录按钮特殊样式 */
+button.btn-primary {
+  width: 520rpx;
+  margin: 0 auto;
+}
+
+/* 微信原生加载指示器样式优化 */
+button.btn-primary[loading] {
+  position: relative;
+}
+
+.footer-tip {
+  text-align: center;
+  padding: 48rpx 0;
+}
+
+.footer-tip text {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+/* 分区与单元格 */
+.section {
+  margin: 24rpx 32rpx 0;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28rpx;
+  height: 100rpx;
+  border-bottom: 1rpx solid #E2E8F0;
+}
+.cell:last-child { border-bottom: none; }
+
+.cell-left {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.emoji-icon {
+  width: 40rpx;
+  display: inline-block;
+  text-align: center;
+  font-size: 30rpx;
+}
+
+.cell-title {
+  font-size: 30rpx;
+  color: var(--text);
+}
+
+.cell-right {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.cell-desc {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+.contact-btn {
+  background-color: #fff;
+  padding: 0 28rpx;
+  margin: 0;
+  border-radius: 0;
+  width: 100% !important;
+  font-weight: normal;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  font-size: 30rpx; /* Match cell-title font size inheritance */
+  line-height: 1.5;
+}
+
+.contact-btn::after {
+  border: none;
+}
+
+.cell-arrow {
+  font-size: 40rpx;
+  color: #94A3B8;
+  line-height: 1;
+}
+
+.badge {
+  padding: 4rpx 12rpx;
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  background: #E2E8F0;
+  color: #475569;
+}
+.badge.danger {
+  background: #FEE2E2;
+  color: #EF4444;
+}

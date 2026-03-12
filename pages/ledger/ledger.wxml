@@ -1,0 +1,136 @@
+<view class="container">
+  <!-- 顶部黄色区域 -->
+  <view class="header-bg">
+    <!-- 日期选择行 -->
+    <view class="header-top">
+      <view class="date-picker">
+        <text class="date-text">{{year}}年 {{month}}月</text>
+        <view class="date-controls">
+          <view class="arrow-btn" bindtap="onPrevMonth">
+            <text class="iconfont icon-arrow-left">‹</text>
+          </view>
+          <view class="arrow-btn" bindtap="onNextMonth">
+            <text class="iconfont icon-arrow-right">›</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 统计卡片行 -->
+    <view class="stats-row" bindtap="onBillCardTap">
+      <view class="stat-card">
+        <text class="stat-label">本月收入</text>
+        <text class="stat-value income">¥ {{summaryIncomeText}}</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-label">本月支出</text>
+        <text class="stat-value expense">¥ {{summaryExpenseText}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 列表区域 -->
+  <scroll-view scroll-y="{{canScroll}}" class="list-scroll" scroll-top="{{scrollTop}}">
+    <view id="ledger-content">
+      <view wx:if="{{empty}}" class="empty">
+        <text class="empty-icon">📒</text>
+        <text class="empty-text">暂无数据</text>
+        <text class="empty-hint" bindtap="goToRecordPage">去「记账」添加一笔吧</text>
+      </view>
+
+      <view wx:else class="groups">
+        <view class="group" wx:for="{{recordList}}" wx:key="dateKey" wx:for-index="groupIndex">
+          <view class="group-header">
+            <text class="group-date">{{item.date}} {{item.week}}</text>
+            <view class="group-summary">
+              <text class="group-summary-txt">收: {{item.totalIncome}}</text>
+              <text class="group-summary-txt">支: {{item.totalExpense}}</text>
+            </view>
+          </view>
+          
+          <view class="group-card">
+            <view
+              class="record-item-wrapper"
+              wx:for="{{item.list}}"
+              wx:for-item="record"
+              wx:for-index="index"
+              wx:key="id"
+            >
+              <view class="record-content"
+                    bindtouchstart="touchStart" 
+                    bindtouchmove="touchMove" 
+                    bindtouchend="touchEnd"
+                    data-group-index="{{groupIndex}}"
+                    data-index="{{index}}"
+                    style="transform: none;">
+                  <view class="record-icon-box" catchtap="onEditCategory" data-record="{{record}}">
+                    <text class="iconfont {{record.categoryIcon || 'icon-canyin'}}"></text>
+                  </view>
+                  <view class="record-info" catchtap="onEditCategory" data-record="{{record}}">
+                    <view class="record-main">
+                      <text class="record-category">{{record.categoryName || '未分类'}}</text>
+                      <text class="record-remark" wx:if="{{record.remark}}">-{{record.remark}}</text>
+                    </view>
+                    <text class="record-time">{{record.createTime}}</text>
+                  </view>
+                  <view class="record-amount {{record.recordType === 2 ? 'income' : 'expense'}}" catchtap="onEditAmount" data-record="{{record}}">
+                    {{record.recordType === 2 ? '+' : '-'}}{{record.amount}}
+                  </view>
+              </view>
+              <view class="delete-btn" catchtap="deleteRecord" data-id="{{record.id}}" style="transform: translateX({{record.translateX}}rpx); transition: {{record.transition ? 'transform 0.3s ease' : 'none'}}">删除</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="safe-bottom"></view>
+    </view>
+  </scroll-view>
+
+  <movable-area class="assistant-fab-area">
+    <movable-view 
+      class="assistant-fab {{isDraggingFab ? 'dragging' : ''}}" 
+      direction="all" 
+      inertia="true" 
+      out-of-bounds="true" 
+      x="{{fabX}}" 
+      y="{{fabY}}" 
+      damping="40" 
+      friction="1.2" 
+      bindtouchstart="onFabTouchStart"
+      bindtouchend="onFabTouchEnd"
+      bindchange="onFabChange"
+    >
+      <view class="fab-inner">
+        <view class="fab-bg"></view>
+        <view class="fab-icon-wrapper">
+          <view class="robot-head">
+            <view class="robot-eye left"></view>
+            <view class="robot-eye right"></view>
+          </view>
+          <view class="robot-body"></view>
+        </view>
+      </view>
+    </movable-view>
+  </movable-area>
+</view>
+
+<category-picker 
+  wx:if="{{showCategoryPicker}}"
+  show="{{showCategoryPicker}}" 
+  defaultType="{{currentRecord.recordType}}"
+  selectedId="{{currentRecord.categoryId}}"
+  bind:close="onCloseCategoryPicker"
+  bind:select="onCategorySelected"
+/>
+
+<amount-editor
+  wx:if="{{showAmountEditor}}"
+  show="{{showAmountEditor}}"
+  initialAmount="{{currentRecord.amount}}"
+  initialRemark="{{currentRecord.remark}}"
+  initialDate="{{currentRecord.recordTime || currentRecord.time}}"
+  bind:close="onCloseAmountEditor"
+  bind:confirm="onAmountConfirmed"
+/>
+
+<custom-tab-bar wx:if="{{!showCategoryPicker && !showAmountEditor}}" />
