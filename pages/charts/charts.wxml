@@ -83,7 +83,7 @@
   <view class="summary-section">
     <view class="balance-row">
       <view class="balance-item">
-        <text class="section-title">本月结余</text>
+        <text class="section-title">结余</text>
         <text class="balance-value">{{currentBalance}}</text>
       </view>
     </view>
