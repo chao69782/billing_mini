@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "图表",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "custom-tab-bar": "/custom-tab-bar"
+  }
+}

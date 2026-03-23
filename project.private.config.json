@@ -1,0 +1,62 @@
+{
+  "libVersion": "3.14.2",
+  "projectname": "billing_wxmini",
+  "setting": {
+    "urlCheck": false,
+    "coverView": true,
+    "lazyloadPlaceholderEnable": false,
+    "skylineRenderEnable": false,
+    "preloadBackgroundData": false,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "compileHotReLoad": true,
+    "useApiHook": true,
+    "useStaticServer": false,
+    "useLanDebug": false,
+    "showES6CompileOption": false,
+    "checkInvalidKey": true,
+    "ignoreDevUnusedFiles": true,
+    "bigPackageSizeSupport": false
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/ledger/ledger",
+          "pathName": "pages/ledger/ledger",
+          "query": "",
+          "scene": null,
+          "launchMode": "default"
+        },
+        {
+          "name": "pages/charts/charts",
+          "pathName": "pages/charts/charts",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/bill-detail/bill-detail",
+          "pathName": "pages/bill-detail/bill-detail",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/mine",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/category-settings/category-settings",
+          "pathName": "pages/category-settings/category-settings",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

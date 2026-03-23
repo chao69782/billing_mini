@@ -1,0 +1,80 @@
+<view class="container">
+  <!-- Header -->
+  <view class="header">
+    <view class="header-left">
+      <picker wx:if="{{activeTab === 0}}" range="{{years}}" value="{{pickerIndex}}" bindchange="onYearChange">
+        <view class="year-picker">
+          <text>{{currentYear}}年</text>
+          <text class="arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+    
+    <view class="header-center">
+      <view class="segment-control">
+        <view class="segment-item {{activeTab === 0 ? 'active' : ''}}" bindtap="onTabClick" data-index="0">月账单</view>
+        <view class="segment-item {{activeTab === 1 ? 'active' : ''}}" bindtap="onTabClick" data-index="1">年账单</view>
+      </view>
+    </view>
+    
+    <view class="header-right">
+      <!-- Placeholder for right icons -->
+      <view class="icon-placeholder"></view>
+    </view>
+  </view>
+
+  <!-- Summary Card -->
+  <view class="summary-card">
+    <view class="summary-header">
+      <text>{{activeTab === 0 ? '年结余' : '总结余'}}</text>
+    </view>
+    <view class="summary-balance">
+      <text class="currency">¥</text>
+      <text class="amount">{{activeTab === 0 ? yearSummary.balance : totalSummary.balance}}</text>
+    </view>
+    <view class="summary-row">
+      <view class="summary-item">
+        <text class="label">{{activeTab === 0 ? '年收入' : '总收入'}}</text>
+        <text class="value">{{activeTab === 0 ? yearSummary.income : totalSummary.income}}</text>
+      </view>
+      <view class="summary-item">
+        <text class="label">{{activeTab === 0 ? '年支出' : '总支出'}}</text>
+        <text class="value">{{activeTab === 0 ? yearSummary.expense : totalSummary.expense}}</text>
+      </view>
+    </view>
+    <!-- Background Icon -->
+    <view class="bg-icon">¥</view>
+  </view>
+
+  <!-- List Header -->
+  <view class="list-header">
+    <text class="col col-1">{{activeTab === 0 ? '月份' : '年份'}}</text>
+    <text class="col col-2">{{activeTab === 0 ? '月收入' : '年收入'}}</text>
+    <text class="col col-3">{{activeTab === 0 ? '月支出' : '年支出'}}</text>
+    <text class="col col-4">{{activeTab === 0 ? '月结余' : '年结余'}}</text>
+  </view>
+
+  <!-- List Content -->
+  <scroll-view scroll-y class="list-content">
+    <block wx:if="{{activeTab === 0}}">
+      <view class="list-item" wx:for="{{monthList}}" wx:key="month">
+        <text class="col col-1">{{item.month}}</text>
+        <text class="col col-2">{{item.income}}</text>
+        <text class="col col-3">{{item.expense}}</text>
+        <view class="col col-4">
+          <text>{{item.balance}}</text>
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="list-item" wx:for="{{yearList}}" wx:key="year">
+        <text class="col col-1">{{item.year}}</text>
+        <text class="col col-2">{{item.income}}</text>
+        <text class="col col-3">{{item.expense}}</text>
+        <view class="col col-4">
+          <text>{{item.balance}}</text>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+</view>

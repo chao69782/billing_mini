@@ -1,0 +1,268 @@
+/* 引用全局样式 */
+@import '../../assets/iconfont.wxss';
+
+page {
+  background: #F8FAFC;
+  height: 100%;
+}
+
+.container {
+  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+}
+
+/* 头部区域 */
+.header {
+  height: var(--header-height);
+  background: var(--header-bg);
+  padding: 0 32rpx var(--header-padding-bottom);
+  position: relative;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  border-radius: 24rpx;
+}
+
+/* 移除之前的伪元素延伸 */
+/* .header::after { ... } */
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+}
+
+/* 卡片通用样式 */
+.card {
+  margin: 24rpx 32rpx 0;
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32rpx;
+  position: relative;
+  z-index: 101; /* 确保卡片在背景之上 */
+}
+
+/* 第一个卡片向上浮动，盖住 header-placeholder */
+.bill-card {
+  margin-top: -84rpx; /* 上浮覆盖 */
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.card-subtitle {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  margin-right: auto;
+  margin-left: 16rpx;
+}
+
+.arrow {
+  font-size: 32rpx;
+  color: #94A3B8;
+}
+
+/* 账单卡片 */
+.bill-content {
+  display: flex;
+  align-items: center;
+  margin-top: 16rpx;
+}
+
+.bill-month {
+  display: flex;
+  align-items: baseline;
+  width: 140rpx;
+}
+
+.month-num {
+  font-size: 48rpx;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.month-label {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  margin-left: 8rpx;
+}
+
+.bill-divider {
+  width: 2rpx;
+  height: 60rpx;
+  background: #E2E8F0;
+  margin: 0 32rpx;
+}
+
+.bill-details {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bill-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.bill-item .label {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+}
+
+.bill-item .amount {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* 预算卡片 */
+.budget-setting-btn {
+  background: var(--brand-yellow);
+  padding: 8rpx 20rpx;
+  border-radius: 30rpx;
+  font-size: 28rpx;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.budget-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24rpx;
+}
+
+.budget-chart {
+  width: 160rpx;
+  height: 160rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #F1F5F9; /* Fallback */
+}
+
+.chart-circle {
+  width: 136rpx;
+  height: 136rpx;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-label {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+}
+
+.chart-value {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.budget-info {
+  flex: 1;
+  margin-left: 48rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.budget-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.budget-row .label {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+.budget-row .value {
+  font-size: 28rpx;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* 资产管家 */
+.asset-content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24rpx;
+}
+
+.asset-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.asset-item .label {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+.asset-item .value {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* 常用功能 */
+.grid-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 16rpx;
+}
+
+.grid-item {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 32rpx;
+}
+
+.icon-wrapper {
+  width: 80rpx;
+  height: 80rpx;
+  background: #F8FAFC;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-wrapper .iconfont {
+  font-size: 40rpx;
+  color: var(--brand-yellow);
+}
+
+.grid-label {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}

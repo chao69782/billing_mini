@@ -1,0 +1,72 @@
+<view class="container">
+  <view class="content">
+    <!-- 邀请码区域 -->
+    <view class="invite-card" wx:if="{{!isMember}}">
+      <view class="invite-top">
+        <text class="invite-label">我的邀请码</text>
+        <text class="invite-code">{{inviteCode || '——'}}</text>
+      </view>
+      <view class="invite-bottom">
+        <text class="invite-desc">向家人分享邀请码即可快速加入家庭</text>
+        <button class="btn-copy" bindtap="onCopy">
+          <text>复制</text>
+        </button>
+      </view>
+    </view>
+
+    <!-- 绑定输入框 (仅无家庭显示) -->
+    <view class="bind-card" wx:if="{{!isOwner && !isMember}}">
+      <input class="code-input" placeholder="输入邀请码加入家庭" value="{{inputCode}}" bindinput="onInputCode"/>
+      <button class="btn-bind" bindtap="onBind" loading="{{bindLoading}}">加入</button>
+    </view>
+
+    <!-- 成员列表 -->
+    <view class="member-section">
+      <view class="section-header">
+        <text class="section-title">成员列表</text>
+        <view class="member-count">{{members.length}} 位成员</view>
+      </view>
+
+      <view class="member-list">
+        <view class="empty-state" wx:if="{{members.length === 0}}">
+          <text>暂无成员</text>
+        </view>
+        
+        <block wx:for="{{members}}" wx:key="id">
+          <view class="member-card">
+            <!-- 头像区域 -->
+            <view class="avatar-box">
+              <image class="avatar" src="{{item.avatarUrl || 'https://shunluda.oss-cn-beijing.aliyuncs.com/avatar.png'}}" mode="aspectFill"></image>
+              <view class="role-icon-owner" wx:if="{{item.role === 0}}">主</view>
+            </view>
+            
+            <!-- 信息区域 -->
+            <view class="info-box">
+              <view class="name-row">
+                <text class="name">{{item.nickName}}</text>
+                <view class="role-tag {{item.role === 0 ? 'tag-admin' : 'tag-member'}}">
+                  {{item.role === 0 ? '管理员' : '成员'}}
+                </view>
+              </view>
+            </view>
+            
+            <!-- 操作区域 -->
+            <view class="action-box">
+              <view class="btn-action btn-remark" data-id="{{item.id}}" data-remark="{{item.remark || ''}}" bindtap="onStartEditRemark">
+                <text>备注</text>
+              </view>
+              
+              <!-- 删除按钮仅管理员可见，且不可删除自己 -->
+              <view class="btn-action btn-delete" 
+                    wx:if="{{isOwner && item.role !== 0}}" 
+                    data-id="{{item.id}}" 
+                    bindtap="onRemove">
+                <text class="iconfont icon-shanchu"></text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

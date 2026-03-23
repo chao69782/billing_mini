@@ -1,0 +1,41 @@
+<page-container 
+  show="{{show}}"
+  round
+  position="bottom"
+  custom-style="height: 60vh; background-color: #fff; display: flex; flex-direction: column;"
+  bind:clickoverlay="onClose"
+>
+  <view class="picker-header">
+    <view class="tabs">
+      <view 
+        class="tab {{categoryType === 1 ? 'active' : ''}}" 
+        data-type="1" 
+        bindtap="onSwitchType"
+      >支出</view>
+      <view 
+        class="tab {{categoryType === 2 ? 'active' : ''}}" 
+        data-type="2" 
+        bindtap="onSwitchType"
+      >收入</view>
+    </view>
+    <view class="close-btn" bindtap="onClose">×</view>
+  </view>
+
+  <scroll-view scroll-y class="category-scroll" enable-flex>
+    <view class="category-grid">
+      <view 
+        class="category-item" 
+        wx:for="{{categoryList}}" 
+        wx:key="id" 
+        data-id="{{item.id}}" 
+        data-item="{{item}}"
+        bindtap="onSelectCategory"
+      >
+        <view class="icon-wrap">
+          <text class="iconfont {{item.categoryIcon}}"></text>
+        </view>
+        <text class="name">{{item.categoryName}}</text>
+      </view>
+    </view>
+  </scroll-view>
+</page-container>

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "账本",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "custom-tab-bar": "/custom-tab-bar",
+    "category-picker": "/components/category-picker/index",
+    "amount-editor": "/components/amount-editor/index"
+  }
+}

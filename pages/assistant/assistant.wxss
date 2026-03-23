@@ -1,0 +1,257 @@
+page {
+  background: #F5F7FA;
+  height: 100%;
+}
+
+.assistant-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.message-list {
+  flex: 1;
+  height: 0;
+  width: 100%;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+.msg {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 24rpx;
+}
+
+.msg .avatar {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background: var(--brand-yellow); /* 改为品牌黄 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.06);
+  margin-right: 16rpx;
+  font-size: 28rpx;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+/* 机器人小图标样式 - 复用但缩小 */
+.robot-icon-small {
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 4rpx; /* 微调垂直居中 */
+}
+
+.robot-head-small {
+  width: 34rpx;
+  height: 28rpx;
+  background: #333;
+  border-radius: 8rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rpx;
+}
+
+/* 天线 */
+.robot-head-small::before {
+  content: '';
+  position: absolute;
+  top: -6rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3rpx;
+  height: 6rpx;
+  background: #333;
+}
+
+.robot-head-small::after {
+  content: '';
+  position: absolute;
+  top: -9rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8rpx;
+  height: 8rpx;
+  background: #FF5252;
+  border-radius: 50%;
+}
+
+.robot-eye-small {
+  width: 6rpx;
+  height: 6rpx;
+  background: #00D68F;
+  border-radius: 50%;
+  margin: 0 4rpx;
+}
+
+.robot-body-small {
+  width: 28rpx;
+  height: 16rpx;
+  background: #333;
+  border-radius: 6rpx 6rpx 12rpx 12rpx;
+}
+
+.msg .bubble {
+  max-width: 70%;
+  padding: 16rpx 20rpx;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #334155;
+}
+
+.msg.assistant .bubble {
+  background: #fff;
+  border-top-left-radius: 4rpx;
+}
+
+.msg.user .bubble {
+  background: var(--brand-yellow);
+  color: #1E293B;
+  border-top-right-radius: 4rpx;
+}
+
+.msg.user {
+  flex-direction: row-reverse;
+}
+
+.msg.user .avatar {
+  margin-right: 0;
+  margin-left: 16rpx;
+  background: transparent; /* 用户头像背景透明 */
+  box-shadow: none; /* 去除阴影 */
+}
+
+.input-bar {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 16rpx 24rpx;
+  /* 适配底部安全区域，基础间距 + 安全区域高度 */
+  padding-bottom: calc(16rpx + constant(safe-area-inset-bottom));
+  padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -4rpx 12rpx rgba(0,0,0,0.04);
+}
+
+.input {
+  flex: 1;
+  height: 72rpx;
+  background: #F1F5F9;
+  border-radius: 999rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+}
+
+.send-btn {
+  height: 72rpx;
+  line-height: 72rpx;
+  padding: 0 32rpx;
+  background: var(--brand-yellow);
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  max-width: 200rpx;
+}
+
+/* 正在输入状态 */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 8rpx 0;
+  min-height: 36rpx;
+}
+
+.dot {
+  width: 12rpx;
+  height: 12rpx;
+  background-color: #94A3B8;
+  border-radius: 50%;
+  animation: typing 1.4s infinite ease-in-out both;
+}
+
+.dot:nth-child(1) { animation-delay: -0.32s; }
+.dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typing {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* 功能暂未开放 */
+.coming-soon {
+  min-height: 100vh;
+  padding: 80rpx 48rpx 48rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #F5F7FA;
+  text-align: center;
+}
+
+.coming-icon {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 24rpx;
+  background: linear-gradient(145deg, #F1F5F9, #E2E8F0);
+  box-shadow: 0 8rpx 24rpx rgba(0,0,0,0.06) inset, 0 -8rpx 24rpx rgba(255,255,255,0.6) inset;
+  position: relative;
+  margin-bottom: 32rpx;
+}
+
+.coming-icon::before,
+.coming-icon::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #94A3B8;
+  border-radius: 999rpx;
+}
+
+.coming-icon::before {
+  top: 48rpx;
+  width: 80rpx;
+  height: 16rpx;
+}
+
+.coming-icon::after {
+  top: 80rpx;
+  width: 48rpx;
+  height: 16rpx;
+}
+
+.coming-title {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #1E293B;
+  margin-bottom: 16rpx;
+}
+
+.coming-desc {
+  font-size: 28rpx;
+  color: #94A3B8;
+  line-height: 1.6;
+}

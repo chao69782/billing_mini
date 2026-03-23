@@ -1,0 +1,43 @@
+<block wx:if="{{version === localVersion}}">
+  <view class="assistant-container">
+    <scroll-view class="message-list" scroll-y="{{canScroll}}" scroll-into-view="{{scrollIntoView}}" scroll-with-animation="true">
+      <view id="message-content">
+        <view class="msg {{item.role}}" wx:for="{{messages}}" wx:key="id" id="msg-{{item.id}}">
+          <view class="avatar" wx:if="{{item.role === 'assistant'}}">
+            <view class="robot-icon-small">
+              <view class="robot-head-small">
+                <view class="robot-eye-small left"></view>
+                <view class="robot-eye-small right"></view>
+              </view>
+              <view class="robot-body-small"></view>
+            </view>
+          </view>
+          <view class="avatar" wx:else>
+            <image class="avatar-img" src="https://shunluda.oss-cn-beijing.aliyuncs.com/avatar.png" mode="aspectFill"></image>
+          </view>
+          <view class="bubble">
+            <block wx:if="{{item.role === 'assistant' && item.content === '...'}}">
+              <view class="typing-indicator">
+                <view class="dot"></view>
+                <view class="dot"></view>
+                <view class="dot"></view>
+              </view>
+            </block>
+            <text wx:else>{{item.content}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="input-bar">
+      <input class="input" cursor-spacing="20" placeholder="问我：分析收支、预算建议..." value="{{inputValue}}" bindinput="onInput" confirm-type="send" bindconfirm="onSend" />
+      <button class="send-btn" bindtap="onSend">发送</button>
+    </view>
+  </view>
+</block>
+<block wx:else>
+  <view class="coming-soon">
+    <view class="coming-icon"></view>
+    <view class="coming-title">功能暂未开放</view>
+    <view class="coming-desc">当前版本暂不支持该功能，请关注后续更新</view>
+  </view>
+</block>

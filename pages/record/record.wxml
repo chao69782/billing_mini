@@ -1,0 +1,100 @@
+<view class="container">
+  <!-- 黄色顶部背景 -->
+  <view class="yellow-bg"></view>
+  
+  <!-- 主面板 -->
+  <view class="main-panel">
+    <!-- 顶部导航 -->
+    <view class="header">
+      <view class="settings-btn" bindtap="onSettings">设置</view>
+      <view class="tabs">
+        <view 
+          class="tab {{categoryType === 1 ? 'active' : ''}}" 
+          data-type="1" 
+          bindtap="onSwitchType"
+        >支出</view>
+        <view 
+          class="tab {{categoryType === 2 ? 'active' : ''}}" 
+          data-type="2" 
+          bindtap="onSwitchType"
+        >收入</view>
+      </view>
+      <view class="cancel-btn" bindtap="onCancel">取消</view>
+    </view>
+
+    <!-- 分类列表 -->
+    <scroll-view scroll-y class="category-scroll" enable-flex>
+      <view class="category-grid">
+        <view 
+          class="category-item {{selectedCategory === item.id ? 'selected' : ''}}" 
+          wx:for="{{categoryList}}" 
+          wx:key="id" 
+          data-id="{{item.id}}"
+          data-name="{{item.categoryName}}"
+          data-icon="{{item.categoryIcon}}"
+          bindtap="onSelectCategory"
+        >
+          <view class="icon-wrap">
+            <text class="iconfont {{item.categoryIcon}}"></text>
+          </view>
+          <text class="name">{{item.categoryName}}</text>
+        </view>
+      </view>
+    </scroll-view>
+
+    <!-- 底部操作区 -->
+    <view class="footer">
+      <!-- 金额显示 -->
+      <view class="amount-display">
+        <text class="amount-text">{{amount || '0.00'}}</text>
+      </view>
+
+      <!-- 备注栏 -->
+      <view class="remark-bar">
+        <text class="remark-label">备注：</text>
+        <input 
+          class="remark-input" 
+          placeholder="点击填写备注" 
+          value="{{remark}}" 
+          bindinput="onRemarkInput"
+          cursor-spacing="20"
+        />
+      </view>
+
+      <!-- 数字键盘 -->
+      <view class="keyboard">
+        <view class="key-row">
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="7">7</view>
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="8">8</view>
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="9">9</view>
+          <view class="key func-key" hover-class="key-hover">
+            <picker mode="date" value="{{dateValue}}" bindchange="onDateChange" class="full-size-picker">
+              <view class="picker-inner">
+                <text class="key-icon">📅</text>
+                <text class="key-text">{{dateDisplay}}</text>
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class="key-row">
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="4">4</view>
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="5">5</view>
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="6">6</view>
+          <view class="key func-key" hover-class="key-hover" bindtap="onKeyTap" data-key="+">+</view>
+        </view>
+        <view class="key-row">
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="1">1</view>
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="2">2</view>
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="3">3</view>
+          <view class="key func-key" hover-class="key-hover" bindtap="onKeyTap" data-key="-">-</view>
+        </view>
+        <view class="key-row">
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key=".">.</view>
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="0">0</view>
+          <view class="key" hover-class="key-hover" bindtap="onDeleteTap">⌫</view>
+          <view class="key submit-key" hover-class="submit-hover" bindtap="onSubmit">完成</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

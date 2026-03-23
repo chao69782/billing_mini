@@ -1,0 +1,54 @@
+{
+  "pages": [
+    "pages/ledger/ledger",
+    "pages/assistant/assistant",
+    "pages/charts/charts",
+    "pages/record/record",
+    "pages/discovery/discovery",
+    "pages/family/family",
+    "pages/mine/mine",
+    "pages/calculator/calculator",
+    "pages/calculator/result/result",
+    "pages/bill-detail/bill-detail",
+    "pages/feedback/feedback",
+    "pages/category-settings/category-settings"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "记账",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#94A3B8",
+    "selectedColor": "#1E293B",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/ledger/ledger",
+        "text": "账本"
+      },
+      {
+        "pagePath": "pages/charts/charts",
+        "text": "图表"
+      },
+      {
+        "pagePath": "pages/record/record",
+        "text": "记账"
+      },
+      {
+        "pagePath": "pages/discovery/discovery",
+        "text": "发现"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

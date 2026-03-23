@@ -1,0 +1,60 @@
+<page-container 
+  show="{{show}}"
+  round
+  position="bottom"
+  custom-style="background-color: #fff;"
+  bind:clickoverlay="onClose"
+>
+  <view class="editor-container">
+    <view class="footer">
+      <view class="amount-display">
+        <text class="amount-text">{{amount || '0.00'}}</text>
+      </view>
+
+      <view class="remark-bar">
+        <text class="remark-label">备注：</text>
+        <input 
+          class="remark-input" 
+          placeholder="点击填写备注" 
+          value="{{remark}}" 
+          bindinput="onRemarkInput"
+          cursor-spacing="20"
+        />
+      </view>
+
+      <view class="keyboard">
+        <view class="key-row">
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="7">7</view>
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="8">8</view>
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="9">9</view>
+          <view class="key func-key" hover-class="key-hover">
+            <picker mode="date" value="{{dateValue}}" bindchange="onDateChange" class="full-size-picker">
+              <view class="picker-inner">
+                <text class="key-icon">📅</text>
+                <text class="key-text">{{dateDisplay}}</text>
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class="key-row">
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="4">4</view>
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="5">5</view>
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="6">6</view>
+          <view class="key func-key" hover-class="key-hover" bindtap="onKeyTap" data-key="+">+</view>
+        </view>
+        <view class="key-row">
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="1">1</view>
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="2">2</view>
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="3">3</view>
+          <view class="key func-key" hover-class="key-hover" bindtap="onKeyTap" data-key="-">-</view>
+        </view>
+        <view class="key-row">
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key=".">.</view>
+          <view class="key" hover-class="key-hover" bindtap="onKeyTap" data-key="0">0</view>
+          <view class="key" hover-class="key-hover" bindtap="onDeleteTap">⌫</view>
+          <view class="key submit-key" hover-class="submit-hover" bindtap="onSubmit">完成</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</page-container>

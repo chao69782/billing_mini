@@ -1,0 +1,134 @@
+<wxs module="drag" src="./drag.wxs" />
+<view class="container">
+
+  <!-- Tabs -->
+  <view class="header-tabs">
+    <view class="segment-control">
+      <view class="segment-item {{currentType === 1 ? 'active' : ''}}" bindtap="switchType" data-type="1">支出</view>
+      <view class="segment-item {{currentType === 2 ? 'active' : ''}}" bindtap="switchType" data-type="2">收入</view>
+    </view>
+  </view>
+
+  <!-- List -->
+  <movable-area class="list">
+    <scroll-view scroll-y style="height: 100%;" enable-flex bindscroll="onScroll">
+      <view id="item-{{index}}" class="item {{dragIndex === index ? 'dragging' : ''}}" wx:for="{{categories}}" wx:key="id">
+        <view class="left-action" bindtap="onDeleteTap" data-id="{{item.id}}" data-name="{{item.categoryName}}">
+          <view class="minus-circle">
+            <view class="minus-line"></view>
+          </view>
+        </view>
+        
+        <view class="content" bindtap="onEditCategory" data-id="{{item.id}}" data-name="{{item.categoryName}}">
+          <view class="icon-wrap">
+            <text class="iconfont {{item.categoryIcon}}"></text>
+          </view>
+          <text class="name">{{item.categoryName}}</text>
+        </view>
+
+        <view class="right-action" 
+          catchtouchstart="{{drag.touchStart}}" 
+          catchtouchmove="{{drag.touchMove}}" 
+          catchtouchend="{{drag.touchEnd}}" 
+          data-index="{{index}}"
+          data-item-height="{{itemHeight}}"
+          data-list-length="{{categories.length}}"
+        >
+          <view class="hamburger">
+            <view class="h-line"></view>
+            <view class="h-line"></view>
+            <view class="h-line"></view>
+          </view>
+        </view>
+      </view>
+      
+      <!-- Spacer for footer -->
+      <view style="height: 20rpx;"></view>
+    </scroll-view>
+
+    <!-- Ghost Item: Rendered using fixed position to sit on top -->
+    <view 
+      hidden="{{!dragging}}"
+      class="movable-item ghost-item"
+      style="width: 100%; position: absolute; top: {{ghostY}}px; left: 0;"
+    >
+      <view class="left-action">
+        <view class="minus-circle">
+          <view class="minus-line"></view>
+        </view>
+      </view>
+      <view class="content">
+        <view class="icon-wrap">
+          <text class="iconfont {{ghostItem.categoryIcon}}"></text>
+        </view>
+        <text class="name">{{ghostItem.categoryName}}</text>
+      </view>
+      <view class="right-action">
+        <view class="hamburger">
+          <view class="h-line"></view>
+          <view class="h-line"></view>
+          <view class="h-line"></view>
+        </view>
+      </view>
+    </view>
+  </movable-area>
+
+  <!-- Footer -->
+  <view class="footer">
+    <view class="add-btn" bindtap="onAddCategory">
+      + 添加类别
+    </view>
+  </view>
+</view>
+
+<!-- Modal Overlay -->
+<view class="modal-mask" wx:if="{{showModal}}" bindtap="closeModal"></view>
+
+<!-- Modal Content -->
+<view class="modal-content {{showModal ? 'show' : ''}}" wx:if="{{showModal}}">
+  <view class="modal-header">
+    <text class="cancel-btn" bindtap="closeModal">取消</text>
+    <text class="modal-title">{{modalTitle}}</text>
+    <view class="confirm-btn" bindtap="submitCategory">完成</view>
+  </view>
+
+  <view class="modal-body">
+    <view class="selected-icon-wrap">
+      <view class="selected-icon-circle">
+        <text class="iconfont {{selectedIcon}}"></text>
+      </view>
+    </view>
+
+    <view class="input-wrap">
+      <input 
+        class="category-input" 
+        value="{{categoryNameInput}}" 
+        bindinput="onInputCategoryName" 
+        placeholder="请输入类别名称 (不超过4个汉字)" 
+        maxlength="4"
+        placeholder-style="color: #A0A0A0; font-size: 28rpx;"
+      />
+    </view>
+
+    <scroll-view scroll-y class="icon-scroll-view">
+      <block wx:for="{{iconGroups}}" wx:key="name">
+        <view class="icon-group-title">{{item.name}}</view>
+        <view class="icon-grid">
+          <view 
+            class="icon-grid-item {{selectedIcon === icon ? 'active' : ''}}" 
+            wx:for="{{item.icons}}" 
+            wx:for-item="icon" 
+            wx:key="*this"
+            bindtap="selectIcon"
+            data-icon="{{icon}}"
+          >
+            <text class="iconfont {{icon}}"></text>
+          </view>
+        </view>
+      </block>
+      <!-- Bottom padding -->
+      <view style="height: 100rpx;"></view>
+    </scroll-view>
+  </view>
+</view>
+

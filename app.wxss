@@ -1,0 +1,39 @@
+@import 'assets/iconfont.wxss';
+
+page {
+  --primary: #1E293B;
+  --primary-bg: #F1F5F9;
+  --text: #1E293B;
+  --text-secondary: #64748B;
+  --bg: #FFFFFF;
+  --card: #FFFFFF;
+  --radius: 16rpx;
+  --shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+  --brand-yellow: #FFDA44; /* 主品牌黄 */
+  --brand-yellow-dark: #FFC107; /* 品牌黄加深，用于渐变/强调 */
+  --text-main: #0F172A; /* 主要文字颜色 */
+  --text-gray: #94A3B8; /* 灰色文字 */
+  --bg-gray: #F8FAFC; /* 浅灰背景 */
+  --bg-tag: #E2E8F0; /* 标签背景 */
+  --bg-danger: #FEF2F2; /* 危险背景 */
+  --text-danger: #EF4444; /* 危险文字 */
+  --shadow-yellow: 0 4rpx 12rpx rgba(255, 215, 0, 0.3); /* 黄色阴影 */
+  --header-bg: var(--brand-yellow); /* 统一的黄色头部背景 */
+  --header-height: 300rpx; /* 统一的头部高度 */
+  --header-padding-bottom: 30rpx; /* 统一的底部内边距 */
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+  color: var(--text);
+  box-sizing: border-box;
+}
+
+.container {
+  min-height: 100vh;
+  padding-bottom: calc(100rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+.safe-bottom {
+  height: env(safe-area-inset-bottom);
+}

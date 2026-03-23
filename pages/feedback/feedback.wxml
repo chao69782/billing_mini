@@ -1,0 +1,24 @@
+<view class="container">
+  <view class="form-group">
+    <view class="form-title">反馈内容</view>
+    <view class="textarea-wrap">
+      <textarea 
+        class="feedback-content" 
+        placeholder="请描述您遇到的问题或建议..." 
+        placeholder-class="placeholder"
+        maxlength="500"
+        bindinput="onContentInput"
+        value="{{content}}"
+      ></textarea>
+      <view class="word-count">{{content.length}}/500</view>
+    </view>
+  </view>
+  <view class="submit-btn-wrap">
+    <button 
+      class="submit-btn {{!content ? 'disabled' : ''}}" 
+      bindtap="onSubmit" 
+      disabled="{{!content || submitting}}"
+      loading="{{submitting}}"
+    >提交反馈</button>
+  </view>
+</view>

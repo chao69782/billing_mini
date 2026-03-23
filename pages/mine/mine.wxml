@@ -1,0 +1,98 @@
+<view class="container">
+  <view class="header">
+    <view class="user-card">
+      <view wx:if="{{hasLogin}}" class="user-info">
+        <image class="avatar" src="https://shunluda.oss-cn-beijing.aliyuncs.com/avatar.png" mode="aspectFill" />
+        <view class="user-meta">
+          <text class="nickname">{{userInfo.nickName}}</text>
+        </view>
+      </view>
+      <view wx:else class="user-guest">
+        <view class="avatar-placeholder">
+          <text class="avatar-icon">👤</text>
+        </view>
+        <text class="guest-desc">登录后体验更完整</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="cell" bindtap="onMenuTap" data-key="category-settings">
+      <view class="cell-left">
+        <text class="emoji-icon iconfont icon-setting"></text>
+        <text class="cell-title">类别设置</text>
+      </view>
+      <view class="cell-right">
+        <text class="cell-arrow">›</text>
+      </view>
+    </view>
+    <view class="cell" bindtap="onMenuTap" data-key="family-ledger">
+      <view class="cell-left">
+        <text class="emoji-icon iconfont icon-jiating"></text>
+        <text class="cell-title">家庭账单</text>
+      </view>
+      <view class="cell-right">
+        <text class="cell-desc">多人协作</text>
+        <text class="cell-arrow">›</text>
+      </view>
+    </view>
+    <view class="cell" bindtap="onMenuTap" data-key="calculator">
+      <view class="cell-left">
+        <text class="emoji-icon iconfont icon-jisuanqi"></text>
+        <text class="cell-title">房贷计算器</text>
+      </view>
+      <view class="cell-right">
+        <text class="cell-arrow">›</text>
+      </view>
+    </view>
+    <view class="cell" bindtap="onMenuTap" data-key="feedback">
+      <view class="cell-left">
+        <text class="emoji-icon iconfont icon-yijian"></text>
+        <text class="cell-title">意见反馈</text>
+      </view>
+      <view class="cell-right">
+        <text class="cell-arrow">›</text>
+      </view>
+    </view>
+    <button class="cell contact-btn" open-type="share">
+      <view class="cell-left">
+        <text class="emoji-icon iconfont icon-pingfen"></text>
+        <text class="cell-title">推荐云鹿记账给好友</text>
+      </view>
+      <view class="cell-right">
+        <text class="cell-arrow">›</text>
+      </view>
+    </button>
+    <button class="cell contact-btn" open-type="contact">
+      <view class="cell-left">
+        <text class="emoji-icon iconfont icon-kefu"></text>
+        <text class="cell-title">联系客服</text>
+      </view>
+      <view class="cell-right">
+        <text class="cell-arrow">›</text>
+      </view>
+    </button>
+    <view class="cell" bindtap="onLogout" data-key="rate" wx-if="{{hasLogin}}">
+      <view class="cell-left">
+        <text class="emoji-icon iconfont icon-tuichu"></text>
+        <text class="cell-title">退出登录</text>
+      </view>
+      <view class="cell-right">
+        <text class="cell-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 未登录时的授权按钮 -->
+  <view class="actions" wx:if="{{!hasLogin}}">
+    <button class="btn btn-primary" bindtap="onLogin" loading="{{loginLoading}}" disabled="{{loginLoading}}">
+      {{loginLoading ? '登录中...' : '微信登录'}}
+    </button>
+  </view>
+
+  <view wx:if="{{!hasLogin}}" class="footer-tip">
+    <text>登录后数据可保存云端</text>
+  </view>
+</view>
+
+<custom-tab-bar />

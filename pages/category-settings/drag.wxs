@@ -1,0 +1,65 @@
+var startY = 0;
+var startIndex = -1;
+var itemHeight = 0;
+var maxIndex = 0;
+
+function touchStart(event, ownerInstance) {
+  var instance = event.instance;
+  var dataset = instance.getDataset();
+  startIndex = dataset.index;
+  itemHeight = dataset.itemHeight;
+  maxIndex = dataset.listLength - 1;
+  
+  var touch = event.touches[0];
+  startY = touch.clientY;
+  
+  ownerInstance.callMethod('initDrag', { index: startIndex });
+  
+  // Set initial transform of ghost item
+  var ghost = ownerInstance.selectComponent('.ghost-item');
+  if (ghost) {
+    ghost.setStyle({
+      transform: 'translateY(0px)'
+    });
+  }
+}
+
+function touchMove(event, ownerInstance) {
+  var touch = event.touches[0];
+  var clientY = touch.clientY;
+  var deltaY = clientY - startY;
+  
+  // Update ghost item position via transform
+  var ghost = ownerInstance.selectComponent('.ghost-item');
+  if (ghost) {
+    ghost.setStyle({
+      transform: 'translateY(' + deltaY + 'px)'
+    });
+  }
+  
+  // Calculate target index
+  var moveSlots = Math.round(deltaY / itemHeight);
+  var targetIndex = startIndex + moveSlots;
+  
+  if (targetIndex < 0) targetIndex = 0;
+  if (targetIndex > maxIndex) targetIndex = maxIndex;
+  
+  ownerInstance.callMethod('checkSwap', { targetIndex: targetIndex });
+}
+
+function touchEnd(event, ownerInstance) {
+  ownerInstance.callMethod('endDrag');
+  
+  var ghost = ownerInstance.selectComponent('.ghost-item');
+  if (ghost) {
+    ghost.setStyle({
+      transform: 'none'
+    });
+  }
+}
+
+module.exports = {
+  touchStart: touchStart,
+  touchMove: touchMove,
+  touchEnd: touchEnd
+};
