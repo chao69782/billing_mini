@@ -25,12 +25,6 @@ Page({
       this.getTabBar().setData({ active: 2, show: false })
     }
     this.getCategoriesByType(this.data.categoryType)
-    // 每次进入页面重置状态
-    this.setData({
-      selectedCategory: null,
-      amount: '0',
-      remark: ''
-    })
   },
 
   initDate() {
